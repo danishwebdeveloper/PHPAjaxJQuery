@@ -17,6 +17,7 @@
     <!-- Button trigger modal -->
 
 <!-- Modal -->
+
 <div class="modal fade" id="completeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -47,6 +48,7 @@
       <button type="button" class="btn btn-primary" onclick="addUser()">Save changes</button>  
       <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
       </div>
+
     </div>
   </div>
 </div>
@@ -88,9 +90,11 @@
 </div>
     <div class="container my-3">
         <h2 class="text-center">PHP CRUD using jQuery AJAX</h2>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#UpdateModal">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#completeModal">
   Add New User
 </button>
+<div id="successAlert" class="my-5 col-sm-4" role="alert">
+</div>
 <div id="displayData">
 
 </div>
@@ -162,8 +166,12 @@ function addUser(){
         sendPlace : place,
     },
         success: function (response) {
-            // console.log('success')
             $('#completeModal').modal('hide');
+            $('#successAlert').addClass('alert alert-success').text('User Added Successfully');
+            setTimeout(() => {
+              $('#successAlert').remove();
+            }, 5000);
+          
             displayRecord();
         },
         error: function(){
@@ -183,6 +191,10 @@ function deleteUser(deleteId){
       },
       success: function (response) {
         $('#completeModal').modal('hide');
+        $('#successAlert').addClass('alert alert-danger').text('User Deleted Successully!');
+        setTimeout(() => {
+          $('#successAlert').remove();
+        }, 4000);
           displayRecord();
       },
       error:function(){
@@ -241,6 +253,10 @@ function updateUser(){
       },
       function(data, status){
         $('#UpdateModal').modal('hide');
+        $('#successAlert').addClass('alert alert-success').text('Updated Successfully!!');
+        setTimeout(() => {
+          $('#successAlert').remove();
+        }, 3000);
         displayRecord();
       }
       )
